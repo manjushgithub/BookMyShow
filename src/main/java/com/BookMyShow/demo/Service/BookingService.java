@@ -19,14 +19,17 @@ public class BookingService {
     private UserRepository userRepository;
     private ShowRepositiries showRepositiries;
     private ShowSeatRepository showSeatRepository;
+    private PriceCalculatorService priceCalculatorService;
 
     public BookingService(UserRepository userRepository,
                           ShowRepositiries showRepositiries,
-                          ShowSeatRepository  showSeatRepository )
+                          ShowSeatRepository  showSeatRepository,
+                          PriceCalculatorService priceCalculatorService)
     {
         this.userRepository=userRepository;
         this.showRepositiries=showRepositiries;
         this.showSeatRepository=showSeatRepository;
+        this.priceCalculatorService=priceCalculatorService;
     }
 
 
@@ -74,7 +77,7 @@ public class BookingService {
 
             Show bookedshow=optionalShow.get();
 
-        List<ShowSeat> showSeats=showSeatRepository.findAllById(showSeatIds)
+        List<ShowSeat> showSeats=showSeatRepository.findAllById(showSeatIds);
         //4.check if all the seats are available or not
 
        // 5.if not,throw an exception;
@@ -102,21 +105,9 @@ public class BookingService {
         booking.setBookedDate(new Date());
         booking.setCreatedAt(new Date());
         booking.setShowSeats(showSeats);
-        booking.setAmount();//here the price logic will be different
+        booking.setAmount(priceCalculatorService.calculatorprice(showSeats,bookedshow));//here the price logic will be different
 
-
-
-
-
-
-
-
-
-
-
-
-
-        return null;
+        return booking;
 
     }
 

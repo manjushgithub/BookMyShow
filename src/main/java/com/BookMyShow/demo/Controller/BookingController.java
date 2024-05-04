@@ -13,22 +13,25 @@ public class BookingController {
     {
         this.bookingService=bookingService;
     }
+     BookMovieResponseDTO bookMovieResponseDTO=new BookMovieResponseDTO();
 
 
     public BookMovieResponseDTO bookMovie(BookMoviewRequestDTO bookMoviewRequestDTO)
     {
-        BookMovieResponseDTO bookMovieResponseDTO=new BookMovieResponseDTO();
-        try {
-            Booking booking = bookingService.bookMovie(bookMoviewRequestDTO.getUserid(),
-                    bookMoviewRequestDTO.getShowId(), bookMoviewRequestDTO.getShowSeatIds());
+
+        try{
+
+            Booking booking=bookingService.bookMovie(bookMoviewRequestDTO.getUserid(),
+                    bookMoviewRequestDTO.getShowId(),bookMoviewRequestDTO.getShowSeatIds());
             bookMovieResponseDTO.setBookingid(booking.getId());
-            bookMovieResponseDTO.setAmount(booking.getAmount());
-            bookMovieResponseDTO.setBookingResponsestatus(BookingResponsestatus.SUCCESS);
+        bookMovieResponseDTO.setAmount(booking.getAmount());
+ bookMovieResponseDTO.setBookingResponsestatus(BookingResponsestatus.SUCCESS);
 
         }catch(Exception exception)
         {
             bookMovieResponseDTO.setBookingResponsestatus(BookingResponsestatus.FAILURE);
         }
+
         return bookMovieResponseDTO;
 
 
