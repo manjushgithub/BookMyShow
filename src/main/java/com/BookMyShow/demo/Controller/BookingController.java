@@ -5,7 +5,9 @@ import com.BookMyShow.demo.DTO.BookMoviewRequestDTO;
 import com.BookMyShow.demo.Model.Booking;
 import com.BookMyShow.demo.Model.BookingResponsestatus;
 import com.BookMyShow.demo.Service.BookingService;
+import org.springframework.stereotype.Controller;
 
+@Controller
 public class BookingController {
 
     private BookingService bookingService;

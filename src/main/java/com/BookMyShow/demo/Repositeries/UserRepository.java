@@ -18,4 +18,9 @@ public interface UserRepository extends JpaRepository<User,Long> {
     @Override
     List<User> findAllById(Iterable<Long> longs);
     //select * from users where user_id IN (1,2,3,4,5);
+
+         Optional<User> findByEmailId(String email);
+
+
+    Optional<User> findByPassword(String password);
 }
